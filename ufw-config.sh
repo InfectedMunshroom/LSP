@@ -1,16 +1,15 @@
-bash
 #!/bin/bash
-echo "Starting ufw configuration"
+
 # Check if the user is root
 if [ "$EUID" -ne 0 ]; then
-    echo "Please run as root"
-    exit 1
+  echo "Please run as root"
+  exit
 fi
 
 # Install UFW if not already installed
-if ! command -v ufw &> /dev/null; then
-    echo "Installing UFW..."
-    dnf install -y ufw
+if ! dpkg -s ufw &> /dev/null; then
+  echo "Installing UFW..."
+  apt install -y ufw
 fi
 
 # Enable UFW service
