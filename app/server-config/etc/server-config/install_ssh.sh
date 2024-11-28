@@ -35,6 +35,7 @@ start_ssh_server() {
         echo "SSH server is already running."
     else
         echo "Starting SSH server..."
+        systemctl enable sshd
         systemctl start sshd
     fi
 }
