@@ -13,13 +13,6 @@ fi
 echo "Updating package index..."
 apt update
 
-# Install UFW if not already installed
-if ! dpkg -s ufw &> /dev/null; then
-  echo "Installing UFW..."
-  apt install -y ufw
-else
-  echo "UFW is already installed."
-fi
 
 # Allow SSH (port 22)
 echo "Allowing SSH through the firewall..."
