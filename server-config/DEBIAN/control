@@ -1,5 +1,5 @@
 Package: server-config
-Version: 0.2
+Version: 0.3
 Maintainer: King Foo
 Architecture: all
 Description: server configuration package
