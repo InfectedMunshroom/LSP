@@ -1,5 +1,5 @@
 Package: server-config
 Version: 0.1
 Maintainer: InfectedMunshroom
-Architecture: x64
+Architecture: amd
 Description: A package to configure multiple different tools and scripts to automate setting up a secure server
