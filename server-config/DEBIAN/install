@@ -1,4 +1,0 @@
-usr/local/bin/ufwenable usr/local/bin/
-usr/local/bin/ufwdisable usr/local/bin/
-etc/my-ufw-tools/snort-rules.sh etc/my-ufw-tools/
-etc/my-ufw-tools/ufw-config.sh etc/my-ufw-tools/

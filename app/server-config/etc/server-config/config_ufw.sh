@@ -1,21 +1,25 @@
 #!/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
+set -e
+
 # Check if the user is root
-if [ "$EUID" -ne 0 ]; then
+if [ $(id -u) -ne 0 ]; then
   echo "Please run as root"
-  exit
+  exit 1
 fi
+
+# Update package index
+echo "Updating package index..."
+apt update
 
 # Install UFW if not already installed
 if ! dpkg -s ufw &> /dev/null; then
   echo "Installing UFW..."
   apt install -y ufw
+else
+  echo "UFW is already installed."
 fi
-
-# Enable UFW service
-echo "Enabling UFW service..."
-systemctl enable ufw
-systemctl start ufw
 
 # Allow SSH (port 22)
 echo "Allowing SSH through the firewall..."
@@ -26,10 +30,13 @@ echo "Allowing HTTP and HTTPS traffic..."
 ufw allow http
 ufw allow https
 
-# Enable the firewall with default rules
-echo "Setting default policies and enabling UFW..."
+# Set default policies
+echo "Setting default policies..."
 ufw default deny incoming
 ufw default allow outgoing
-ufw enable
+
+# Enable UFW service
+echo "Enabling UFW service..."
+ufw --force enable
 
 echo "Firewall setup complete."

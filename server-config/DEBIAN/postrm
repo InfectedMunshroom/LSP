@@ -1,4 +1,0 @@
-#!/bin/bash
-# Remove configuration files
-rm /etc/my-ufw-tools/snort-rules.sh
-rm /etc/my-ufw-tools/ufw-config.sh

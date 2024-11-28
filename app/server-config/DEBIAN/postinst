@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#Make scripts usable
+chmod +x /usr/local/bin/portenable
+chmod +x /usr/local/bin/portdisable
+
+
+
+#Execute config files
+bash /etc/server-config/config_clamav.sh
+bash /etc/server-config/config_ufw.sh
+bash /etc/server-config/install_ssh.sh
+bash /etc/server-config/rules_snort.sh
