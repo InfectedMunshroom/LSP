@@ -7,7 +7,6 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-
 is_openssh_installed() {
     if command -v ssh >/dev/null 2>&1 && command -v sshd >/dev/null 2>&1; then
         return 0
@@ -31,11 +30,23 @@ configure_openssh() {
     systemctl enable sshd
 }
 
+start_ssh_server() {
+    if systemctl is-active --quiet sshd; then
+        echo "SSH server is already running."
+    else
+        echo "Starting SSH server..."
+        systemctl start sshd
+    fi
+}
+
 if is_openssh_installed; then
     echo "OpenSSH is already installed. Skipping installation."
 else
     install_openssh
 fi
+
+# Ensure SSH server is running
+start_ssh_server
 
 configure_openssh
 echo "OpenSSH setup and configuration complete."

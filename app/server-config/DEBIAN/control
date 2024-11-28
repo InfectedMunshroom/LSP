@@ -1,6 +1,6 @@
 Package: server-config
 Version: 0.1
 Maintainer: InfectedMunshroom
-Architecture: amd54
+Architecture: amd64
 Depends: snort, clamav, clamav-daemon, ufw, openssh-server
 Description: A package to configure multiple different tools and scripts to automate setting up a secure server
