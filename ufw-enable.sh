@@ -1,8 +1,9 @@
 #!/bin/bash
 
-if [ "$EUID" -ne 0 ]; then
+# Check for root privileges
+if [[ $(id -u) -ne 0 ]]; then
   echo "Please run as root"
-  exit
+  exit 1
 fi
 
 if ! dpkg -s ufw &> /dev/null; then
