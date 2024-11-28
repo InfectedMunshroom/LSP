@@ -1,8 +1,9 @@
 #!/bin/bash
 
-if [ "$EUID" -ne 0 ]; then
+# Check for root privileges
+if [[ $(id -u) -ne 0 ]]; then
   echo "Please run as root"
-  exit
+  exit 1
 fi
 
 if ! dpkg -s ufw &> /dev/null; then
@@ -17,8 +18,9 @@ if [[ ! "$port" =~ ^[0-9]+$ ]]; then
   exit 1
 fi
 
-if ! ufw status | grep -q "$port"; then
-  echo "Port $port is not currently allowed."
+# Check if a rule exists for the specified port, allowing for variations in output
+if ! ufw status numbered | grep -q "ALLOW IN .* $port/tcp" && ! ufw status numbered | grep -q "ALLOW IN .* $port"; then
+  echo "No rule found for port $port."
   exit 0
 fi
 
