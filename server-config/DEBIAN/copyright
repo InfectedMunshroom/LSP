@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: server-config
+Upstream-Contact: Ayushman
+Source: https://github.com/infectedmunshroom/LSP
+
+Files: *
+Copyright: 2024 Ayushman
+License: GPL-3
