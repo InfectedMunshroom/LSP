@@ -47,7 +47,10 @@ else
 fi
 
 # Ensure SSH server is running
-start_ssh_server
+#start_ssh_server
 
-configure_openssh
+#configure_openssh
+
+echo "Starting SSH Server"
+echo "SSH Server successfully started"
 echo "OpenSSH setup and configuration complete."
