@@ -7,14 +7,19 @@ if id "$username" &> /dev/null; then
   exit 1
 fi
 
+read -s -p "Enter the password for the new user: " password
+echo  
+
 read -p "Should the user be forced to change the password on next login? [y/n] " change_password
 change_password=$(echo "$change_password" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$change_password" == "y" ]]; then
   useradd -m -d /home/"$username" -s /bin/bash -e 0 "$username"
-  passwd -e "$username" 
+  echo "$username:$password" | chpasswd  
+  passwd -e "$username"  
 else
   useradd -m -d /home/"$username" -s /bin/bash "$username"
+  echo "$username:$password" | chpasswd  
 fi
 
 read -p "Should the user have sudo access? [y/n] " sudo_access

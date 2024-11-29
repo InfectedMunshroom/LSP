@@ -54,3 +54,9 @@ configure_openssh
 echo "Starting SSH Server"
 #echo "SSH Server successfully started"
 echo "OpenSSH setup and configuration complete."
+
+read -p "Install secureTransfer? " choice
+if [[ $choice == "y" ]]; then
+    git clone https://github.com/infectedmunshroom/secureTransfer.git 
+    echo "secureTransfer installed"
+
