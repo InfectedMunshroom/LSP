@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Check if ClamAV is installed
+if ! command -v clamscan &> /dev/null; then
+  echo "ClamAV is not installed. Please install it before running this script."
+  exit 1
+fi
+
+# Get the file/directory path from the command-line argument
+path="$1"
+
+# Check if a path is provided
+if [ -z "$path" ]; then
+  echo "Usage: $0 <file_or_directory_path>"
+  exit 1
+fi
+
+# Resolve relative path to absolute path
+path=$(realpath "$path")
+
+# Check if the path exists
+if [ ! -e "$path" ]; then
+  echo "Error: Path not found."
+  exit 1
+fi
+
+# Check if it's a file or directory
+if [ -f "$path" ]; then
+  # Scan a single file
+  echo "Scanning file: $path ..."
+  clamscan "$path"
+elif [ -d "$path" ]; then
+  # Scan a directory recursively
+  echo "Scanning directory: $path ..."
+  clamscan -r "$path"
+else
+  echo "Error: Invalid path type."
+  exit 1
+fi
+
+# Check the exit code of clamscan
+if [ $? -eq 0 ]; then
+  echo "Scan complete. No viruses found."
+else
+  echo "Scan complete. Virus detected!"
+fi

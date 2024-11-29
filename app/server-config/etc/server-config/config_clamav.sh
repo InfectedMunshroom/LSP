@@ -6,9 +6,7 @@ if [ "$(id -u)" -ne 0 ]; then
     echo "This script must be run as root. Exiting."
     exit 1
 fi
-
-apt-get update
-apt-get install clamav clamav-daemon -y
+echo "Configuring Clam AV"
 systemctl stop clamav-freshclam
 freshclam
 systemctl start clamav-freshclam
