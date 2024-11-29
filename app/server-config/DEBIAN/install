@@ -1,6 +1,8 @@
 usr/local/bin/portdisable usr/local/bin
 usr/local/bin/portenable usr/local/bin
 usr/local/bin/scan usr/local/bin
+usr/local/bin/createuser usr/local/bin
+usr/local/bin/networkactive usr/local/bin
 etc/server-config/config_clamav.sh etc/server-config
 etc/server-config/config_ufw.sh etc/server-config
 etc/server-config/install_ssh.sh etc/server-config

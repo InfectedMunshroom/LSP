@@ -1,5 +1,5 @@
 Package: server-config
-Version: 0.1
+Version: 0.2
 Maintainer: InfectedMunshroom
 Architecture: amd64
 Depends: snort, clamav, clamav-daemon, ufw, openssh-server

@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# Check if Snort is installed
 if ! command -v snort &> /dev/null; then
     echo "Snort is not installed. Please install it before running this script."
     exit 1
 fi
 
-# Find the Snort configuration file
 snort_conf=$(find / -name "snort.conf" 2>/dev/null)
 if [ -z "$snort_conf" ]; then
     read -p "Snort configuration file not found automatically. Please enter the full path to the configuration file: " snort_conf
@@ -16,7 +14,6 @@ if [ -z "$snort_conf" ]; then
     fi
 fi
 
-# Find the rules directory
 rules_dir=$(grep "var RULE_PATH" "$snort_conf" | awk '{print $3}' | sed 's/"//g')
 
 if [ -z "$rules_dir" ]; then
@@ -24,11 +21,9 @@ if [ -z "$rules_dir" ]; then
     exit 1
 fi
 
-# Create the customrules.rules file in the rules directory
 custom_rules_file="$rules_dir/customrules.rules"
 touch "$custom_rules_file"
 
-# Ask if you want to bypass a specific IP
 read -p "Do you want to bypass a specific IP? (y/n): " bypass_ip
 if [ "$bypass_ip" == "y" ]; then
     read -p "Enter the IP to bypass: " user_ip
@@ -238,7 +233,6 @@ EOT
 
 echo "Custom rules added to $custom_rules_file."
 
-# Ask if you want to log the rules to syslog
 read -p "Do you want to configure Snort to log the rules to syslog? (y/n): " syslog_config
 if [ "$syslog_config" == "y" ]; then
     if ! grep -q "output alert_syslog" "$snort_conf"; then
@@ -249,12 +243,10 @@ if [ "$syslog_config" == "y" ]; then
         echo "Syslog configuration already present in Snort configuration file."
     fi
     
-    # Check if rsyslog is configured correctly
     if ! grep -q "local1.* /var/log/syslog" /etc/rsyslog.conf; then
         echo "local1.* /var/log/syslog" >> /etc/rsyslog.conf
         echo "Rsyslog configuration updated."
         
-        # Restart rsyslog and snort
         systemctl restart rsyslog
         echo "Rsyslog restarted."
     else

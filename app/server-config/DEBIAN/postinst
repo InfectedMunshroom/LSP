@@ -3,6 +3,9 @@
 #Make scripts usable
 chmod +x /usr/local/bin/portenable
 chmod +x /usr/local/bin/portdisable
+chmod +x /usr/local/bin/scan
+chmod +x /usr/local/bin/networkactive
+chmod +x /usr/local/bin/createuser
 
 
 
