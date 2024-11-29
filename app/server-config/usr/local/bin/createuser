@@ -1,0 +1,28 @@
+#!/bin/bash
+
+read -p "Enter the new username: " username
+
+if id "$username" &> /dev/null; then
+  echo "Error: User '$username' already exists."
+  exit 1
+fi
+
+read -p "Should the user be forced to change the password on next login? [y/n] " change_password
+change_password=$(echo "$change_password" | tr '[:upper:]' '[:lower:]')
+
+if [[ "$change_password" == "y" ]]; then
+  useradd -m -d /home/"$username" -s /bin/bash -e 0 "$username"
+  passwd -e "$username" 
+else
+  useradd -m -d /home/"$username" -s /bin/bash "$username"
+fi
+
+read -p "Should the user have sudo access? [y/n] " sudo_access
+sudo_access=$(echo "$sudo_access" | tr '[:upper:]' '[:lower:]')
+
+if [[ "$sudo_access" == "y" ]]; then
+  usermod -aG sudo "$username"
+  echo "User '$username' added to sudoers group."
+fi
+
+echo "User '$username' created successfully."

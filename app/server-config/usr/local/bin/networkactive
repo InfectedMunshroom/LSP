@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Active network interfaces:"
+
+# Use ip command to get interface information, filter for 'UP' state
+ip -o link show | grep 'state UP' | awk '{print $2}' | sed 's/:$//'

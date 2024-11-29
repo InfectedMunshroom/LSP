@@ -46,11 +46,11 @@ else
     install_openssh
 fi
 
-# Ensure SSH server is running
-#start_ssh_server
+Ensure SSH server is running
+start_ssh_server
 
-#configure_openssh
+configure_openssh
 
 echo "Starting SSH Server"
-echo "SSH Server successfully started"
+#echo "SSH Server successfully started"
 echo "OpenSSH setup and configuration complete."
